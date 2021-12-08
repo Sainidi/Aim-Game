@@ -4,6 +4,7 @@ const timeList = document.querySelector('.time-list')
 const timeBtn = document.querySelectorAll('.time-btn')
 const timeCounter = document.querySelector('#time')
 const board = document.querySelector('#board')
+const colors = ['#00ffff', '#7fffd4', '#6495ed', '#ff7f50', '#006400', '#9400d3', '#ff1494']
 
 let time = 0
 let score = 0
@@ -20,6 +21,11 @@ timeList.addEventListener('click', e => {
         startGame()
     }
 })
+
+const getRandomColor = () => {
+    const index = Math.floor(Math.random() * colors.length)
+    return colors[index]
+}
 
 const timerCounter = (value) => {
     timeCounter.innerHTML = `00:${value}`
@@ -43,6 +49,10 @@ const getRandomNumber = (min, max) => {
 
 const createRandomCircle = () => {
     const circle = document.createElement('div')
+
+    const color = getRandomColor()
+    circle.style.backgroundColor = `${color}`
+    circle.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color} `
 
     const size = getRandomNumber(10, 70)
     const {width, height} = board.getBoundingClientRect()
